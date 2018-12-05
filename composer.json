@@ -1,0 +1,45 @@
+{
+    "name": "ahsankhatri/cryptolib-php",
+    "description": "A library to encrypt or decrypt with random password generator based on secret key defined.",
+    "keywords": [
+        "aes-encryption",
+        "rijndael",
+        "cryptolib"
+    ],
+    "homepage": "https://github.com/ahsankhatri/cryptolib-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahsaan Muhammad Yousuf",
+            "email": "ahsankhatri1992@gmail.com",
+            "homepage": "https://ahsaan.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "ext-openssl": "*"
+    },
+    "require-dev": {
+        "larapack/dd": "^1.0",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MrShan0\\CryptoLib\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MrShan0\\CryptoLib\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
