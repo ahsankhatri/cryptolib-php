@@ -4,6 +4,7 @@ namespace MrShan0\CryptoLib;
 
 use MrShan0\CryptoLib\Exceptions\NotSecureIVGenerated;
 use MrShan0\CryptoLib\Exceptions\UnableToDecrypt;
+use Throwable;
 
 class CryptoLib
 {
@@ -56,22 +57,23 @@ class CryptoLib
 
     public function generateRandomIV()
     {
-        $efforts     = 0;
-        $maxEfforts  = 50;
-        $wasItSecure = false;
+        // We need to generate our IV by following characters
+        $allowedIVString = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
 
-        do {
+        try {
+            // Invalid method will throw a warning.
+            $length = openssl_cipher_iv_length($this->getOptions('method'));
+        } catch (Throwable $t) {
+            throw new NotSecureIVGenerated("Unable to generate random IV.");
+        }
 
-            $efforts += 1;
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->getOptions('method')), $wasItSecure);
-            if ($efforts == $maxEfforts) {
-                throw new NotSecureIVGenerated('Unable to genereate secure IV.');
-                break;
-            }
+        // For any reason if required IV size needs greater value.
+        if ($length > strlen($allowedIVString)) {
+            $repeatedIVString = str_repeat($allowedIVString, ceil($length/strlen($allowedIVString)));
+            $allowedIVString .= $repeatedIVString;
+        }
 
-        } while (!$wasItSecure);
-
-        return $iv;
+        return substr(str_shuffle($allowedIVString), 0, $length);
     }
 
     public function getComputedHash($key)
