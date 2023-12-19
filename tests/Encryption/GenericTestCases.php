@@ -7,6 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 abstract class GenericTestCases extends TestCase
 {
+    /**
+     * @var \MrShan0\CryptoLib\CryptoLib
+     */
+    protected $cryptolib;
+
     abstract public function initClass();
 
     public function additionProvider()
@@ -19,6 +24,28 @@ abstract class GenericTestCases extends TestCase
     public function getCryptoLib()
     {
         return $this->cryptolib;
+    }
+
+    /**
+     * @test
+     */
+    public function all_specified_options()
+    {
+        $lib = new \MrShan0\CryptoLib\CryptoLib([
+            'method' => 'AES-256-CBC',
+        ]);
+
+        $this->assertIsArray($lib->getOptions());
+    }
+
+    /**
+     * @test
+     */
+    public function invalid_cipher_algorithm_length_exception()
+    {
+        $this->expectException(\MrShan0\CryptoLib\Exceptions\NotSecureIVGenerated::class);
+
+        (new \MrShan0\CryptoLib\CryptoLib(['method' => 'invalid']))->generateRandomIV();
     }
 
     protected function random_iv($cryptolib, $key)

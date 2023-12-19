@@ -1,6 +1,7 @@
 # CryptoLib (PHP)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ahsankhatri/cryptolib-php.svg?style=flat-square)](https://packagist.org/packages/ahsankhatri/cryptolib-php)
+![tests](https://github.com/ahsankhatri/cryptolib-php/actions/workflows/php-test.yml/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/ahsankhatri/cryptolib-php.svg?style=flat-square)](https://packagist.org/packages/ahsankhatri/cryptolib-php)
 [![License](https://poser.pugx.org/ahsankhatri/cryptolib-php/license?format=flat-square)](https://packagist.org/packages/ahsankhatri/cryptolib-php)
 

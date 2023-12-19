@@ -4,8 +4,6 @@ namespace MrShan0\CryptoLib\Tests\Encryption;
 
 class AES_256_CBC_Test extends GenericTestCases
 {
-    protected $cryptolib;
-
     public function initClass()
     {
         $secretKey       = openssl_random_pseudo_bytes(16);

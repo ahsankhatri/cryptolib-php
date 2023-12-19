@@ -21,7 +21,7 @@ class CryptoLib
         'method'             => 'AES-256-CBC',
 
         /**
-         * Algorithm to apply while generating password via secrety key
+         * Algorithm to apply while generating password via secret key
          */
         'algorithm'          => 'sha256',
 
@@ -69,8 +69,10 @@ class CryptoLib
 
         // For any reason if required IV size needs greater value.
         if ($length > strlen($allowedIVString)) {
+            // @codeCoverageIgnoreStart
             $repeatedIVString = str_repeat($allowedIVString, ceil($length/strlen($allowedIVString)));
             $allowedIVString .= $repeatedIVString;
+            // @codeCoverageIgnoreEnd
         }
 
         return substr(str_shuffle($allowedIVString), 0, $length);
